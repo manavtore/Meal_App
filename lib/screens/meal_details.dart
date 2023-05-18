@@ -16,31 +16,49 @@ class MealDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(meal.title),
       ),
-      body: Column(
-        children: [
-          Image.network(
-            meal.imageUrl,
-            width: double.infinity,
-            height: 300,
-            fit: BoxFit.cover,
-          ),
-          const SizedBox(
-            height: 14,
-          ),
-          Text(
-            'Ingrediants',
-            style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  color: Theme.of(context).colorScheme.onBackground,
-                ),
-          ),
-          for (final ingredient in meal.ingredients)
+      body: SingleChildScrollView(
+        //scrollable with text alingement to the senter rather then scrollview
+        child: Column(
+          children: [
+            Image.network(
+              meal.imageUrl,
+              width: double.infinity,
+              height: 300,
+              fit: BoxFit.cover,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
             Text(
-              ingredient,
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground,
+              'Ingredients',
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.bold,
                   ),
-            )
-        ],
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            for (final ingredient in meal.ingredients)
+              Text(
+                ingredient,
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
+              ),
+            const SizedBox(
+              height: 16,
+            ),
+            for (final step in meal.steps)
+              Text(
+                step,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
+              ),
+          ],
+        ),
       ),
     );
   }
