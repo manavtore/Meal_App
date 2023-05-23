@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 
 import '../models/meal.dart';
@@ -6,9 +8,11 @@ class MealDetailsScreen extends StatelessWidget {
   const MealDetailsScreen({
     super.key,
     required this.meal,
+    required this.OnToggleFavorite,
   });
 
   final Meal meal;
+  final void Function(Meal meal) OnToggleFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +21,15 @@ class MealDetailsScreen extends StatelessWidget {
         title: Text(meal.title),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              OnToggleFavorite(meal);
+            },
             icon: const Icon(Icons.star),
           ),
         ],
       ),
       body: SingleChildScrollView(
-        //scrollable with text alingement to the senter rather then scrollview
+        //scrollable with text alingement to the center rather then scrollview
         child: Column(
           children: [
             Image.network(
