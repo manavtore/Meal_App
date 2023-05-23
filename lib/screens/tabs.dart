@@ -1,5 +1,7 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:meals/models/meal.dart';
 import 'package:meals/screens/categories.dart';
@@ -20,6 +22,12 @@ class _TabsScreen extends State<TabsScreen> {
   int _selectedPageIndex = 0;
   final List<Meal> _favouriteMeals = [];
 
+  void showinfoMessage(String message) {
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
   void _toggleMealFavouriteStatus(Meal meal) {
     final isExisting = _favouriteMeals.contains(meal);
 
@@ -27,10 +35,12 @@ class _TabsScreen extends State<TabsScreen> {
       setState(() {
         _favouriteMeals.remove(meal);
       });
+      showinfoMessage('the item is not your favourite list now!');
     } else {
       setState(() {
         _favouriteMeals.add(meal);
       });
+      showinfoMessage('the item added to favourite list');
     }
   }
 
