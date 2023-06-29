@@ -34,12 +34,42 @@ class Maindrawer extends StatelessWidget {
                   ),
                   Text(
                     'Cookingup',
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                          color: Theme.of(context).colorScheme.primary,
+                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                          color: Theme.of(context).colorScheme.onBackground,
                         ),
                   )
                 ],
-              ))
+              )),
+          ListTile(
+            leading: Icon(
+              Icons.restaurant,
+              size: 26,
+              color: Theme.of(context).colorScheme.background,
+            ),
+            title: Text(
+              'Meals',
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontSize: 24,
+                  ),
+            ),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.settings,
+              size: 26,
+              color: Theme.of(context).colorScheme.background,
+            ),
+            title: Text(
+              'Settings',
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontSize: 24,
+                  ),
+            ),
+            onTap: () {},
+          )
         ],
       ),
     );
