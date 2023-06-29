@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:meals/models/meal.dart';
 import 'package:meals/screens/categories.dart';
 import 'package:meals/screens/meals.dart';
+import 'package:meals/widgets/main_drawer.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({
@@ -70,6 +71,7 @@ class _TabsScreen extends State<TabsScreen> {
       appBar: AppBar(
         title: Text(activePagetitle),
       ),
+      drawer: Maindrawer(),
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectpage,
@@ -82,7 +84,7 @@ class _TabsScreen extends State<TabsScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.star),
             label: 'Favourite',
-          )
+          ),
         ],
       ),
     );
