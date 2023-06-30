@@ -35,8 +35,8 @@ class Maindrawer extends StatelessWidget {
                   ),
                   Text(
                     'Cookingup',
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: Theme.of(context).colorScheme.onBackground,
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                   )
                 ],
