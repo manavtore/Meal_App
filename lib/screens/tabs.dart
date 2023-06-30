@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:meals/models/meal.dart';
 import 'package:meals/screens/categories.dart';
 import 'package:meals/screens/filters.dart';
@@ -49,11 +52,10 @@ class _TabsScreen extends State<TabsScreen> {
   }
 
   void _setScreen(String identifier) {
+    Navigator.of(context).pop();
     if (identifier == 'filters') {
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (ctx) => const FilterScreen()));
-    } else {
-      Navigator.of(context).pop();
     }
   }
 

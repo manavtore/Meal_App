@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:meals/screens/categories.dart';
+// import 'package:meals/screens/categories.dart';
 import 'package:meals/screens/tabs.dart';
 
 final theme = ThemeData(
