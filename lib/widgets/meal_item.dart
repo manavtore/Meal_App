@@ -64,7 +64,7 @@ class MealItem extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 12,
+                        height: 20,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
