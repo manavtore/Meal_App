@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 enum Filter { Glutenfree, LactoseFree, Vegetarian, Vegan }
 
 class FilterScreen extends StatefulWidget {
-  const FilterScreen({super.key});
+  const FilterScreen({super.key, required this.currentFilter});
+  final Map<Filter, bool> currentFilter;
 
   @override
   State<FilterScreen> createState() => _FilterScreenState();
@@ -19,6 +20,16 @@ class _FilterScreenState extends State<FilterScreen> {
   var _LactoseFreeFilterSet = false;
   var _VegeterianFilterset = false;
   var _VeganFilterSet = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _glutenFreeFilterSet = widget.currentFilter[Filter.Glutenfree]!;
+    _LactoseFreeFilterSet = widget.currentFilter[Filter.LactoseFree]!;
+    _VegeterianFilterset = widget.currentFilter[Filter.Vegetarian]!;
+    _VeganFilterSet = widget.currentFilter[Filter.Vegan]!;
+  }
 
   @override
   Widget build(BuildContext context) {
