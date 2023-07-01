@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:meals/data/dummy_data.dart';
 // import 'package:flutter/scheduler.dart';
 import 'package:meals/models/meal.dart';
 import 'package:meals/screens/categories.dart';
 import 'package:meals/screens/filters.dart';
 import 'package:meals/screens/meals.dart';
 import 'package:meals/widgets/main_drawer.dart';
+
+const KInitialFilters = {
+  Filter.Glutenfree: false,
+  Filter.LactoseFree: false,
+  Filter.Vegetarian: false,
+  Filter.Vegan: false,
+};
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({
@@ -20,12 +28,7 @@ class TabsScreen extends StatefulWidget {
 class _TabsScreen extends State<TabsScreen> {
   int _selectedPageIndex = 0;
   final List<Meal> _favouriteMeals = [];
-  Map<Filter, bool> _selectedFilter = {
-    Filter.Glutenfree: false,
-    Filter.LactoseFree: false,
-    Filter.Vegetarian: false,
-    Filter.Vegan: false,
-  };
+  Map<Filter, bool> _selectedFilter = KInitialFilters;
 
   void showinfoMessage(String message) {
     ScaffoldMessenger.of(context).clearSnackBars();
@@ -61,13 +64,33 @@ class _TabsScreen extends State<TabsScreen> {
       final result = await Navigator.of(context).push<Map<Filter, bool>>(
         MaterialPageRoute(builder: (ctx) => const FilterScreen()),
       );
+      setState(() {
+        _selectedFilter = result ?? KInitialFilters;
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final availableMeals = dummyMeals.where((meal) {
+      if (_selectedFilter[Filter.Glutenfree]! && !meal.isGlutenFree) {
+        return false;
+      }
+      if (_selectedFilter[Filter.LactoseFree]! && !meal.isLactoseFree) {
+        return false;
+      }
+      if (_selectedFilter[Filter.Vegetarian]! && !meal.isVegetarian) {
+        return false;
+      }
+      if (_selectedFilter[Filter.Vegan]! && !meal.isVegan) {
+        return false;
+      }
+      return true;
+    }).toList();
+
     Widget activePage = CategoriesScreen(
       onToggleFavourite: _toggleMealFavouriteStatus,
+      availableMeals: availableMeals,
     );
 
     var activePagetitle = 'Your Favourites';
