@@ -16,14 +16,13 @@ class FilterScreen extends StatefulWidget {
 
 class _FilterScreenState extends State<FilterScreen> {
   var _glutenFreeFilterSet = false;
-  // ignore: non_constant_identifier_names
+
   var _LactoseFreeFilterSet = false;
   var _VegeterianFilterset = false;
   var _VeganFilterSet = false;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _glutenFreeFilterSet = widget.currentFilter[Filter.Glutenfree]!;
     _LactoseFreeFilterSet = widget.currentFilter[Filter.LactoseFree]!;
