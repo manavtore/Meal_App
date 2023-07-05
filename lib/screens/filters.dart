@@ -1,58 +1,24 @@
-// ignore_for_file: non_constant_identifier_names
-
 import 'package:flutter/material.dart';
-// import 'package:meals/screens/tabs.dart';
-// import 'package:meals/widgets/main_drawer.dart';
 import 'package:meals/provider/filters_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FilterScreen extends ConsumerStatefulWidget {
+class FilterScreen extends ConsumerWidget {
   const FilterScreen({super.key});
-
   @override
-  ConsumerState<FilterScreen> get createState => _FilterScreenState();
-}
-
-class _FilterScreenState extends ConsumerState<FilterScreen> {
-  var _glutenFreeFilterSet = false;
-  var _LactoseFreeFilterSet = false;
-  var _VegeterianFilterset = false;
-  var _VeganFilterSet = false;
-
-  @override
-  void initState() {
-    super.initState();
-    final activeFilters = ref.read(filterProvider);
-    _glutenFreeFilterSet = activeFilters[Filter.Glutenfree]!;
-    _LactoseFreeFilterSet = activeFilters[Filter.LactoseFree]!;
-    _VegeterianFilterset = activeFilters[Filter.Vegetarian]!;
-    _VeganFilterSet = activeFilters[Filter.Vegan]!;
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final activefilters = ref.watch(filterProvider);
     return Scaffold(
         appBar: AppBar(
           title: const Text('Your Filters'),
         ),
-        body: WillPopScope(
-          onWillPop: () async {
-            ref.read(filterProvider.notifier).setFilters({
-              Filter.Glutenfree: _glutenFreeFilterSet,
-              Filter.LactoseFree: _LactoseFreeFilterSet,
-              Filter.Vegetarian: _VegeterianFilterset,
-              Filter.Vegan: _VeganFilterSet,
-            });
-            // Navigator.of(context).pop();
-            return true;
-          },
-          child: Column(children: [
+        body: Column(
+          children: [
             SwitchListTile(
-              value: _glutenFreeFilterSet,
+              value: activefilters[Filter.Glutenfree]!,
               onChanged: (ischecked) {
-                setState(() {
-                  _glutenFreeFilterSet = ischecked;
-                });
+                ref
+                    .read(filterProvider.notifier)
+                    .setFilter(Filter.Glutenfree, ischecked);
               },
               title: Text(
                 'Gluten-Free',
@@ -60,19 +26,21 @@ class _FilterScreenState extends ConsumerState<FilterScreen> {
                       color: Theme.of(context).colorScheme.onBackground,
                     ),
               ),
-              subtitle: Text('only include Gluten-free Meal',
-                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                        color: Theme.of(context).colorScheme.onBackground,
-                      )),
-              activeColor: Theme.of(context).colorScheme.tertiary,
+              subtitle: Text(
+                'Only include Gluten-free Meal',
+                style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
+              ),
+              activeColor: Theme.of(context).colorScheme.secondary,
               contentPadding: const EdgeInsets.only(left: 34, right: 22),
             ),
             SwitchListTile(
-              value: _LactoseFreeFilterSet,
+              value: activefilters[Filter.LactoseFree]!,
               onChanged: (ischecked) {
-                setState(() {
-                  _LactoseFreeFilterSet = ischecked;
-                });
+                ref
+                    .read(filterProvider.notifier)
+                    .setFilter(Filter.LactoseFree, ischecked);
               },
               title: Text(
                 'Lactose-Free',
@@ -80,19 +48,21 @@ class _FilterScreenState extends ConsumerState<FilterScreen> {
                       color: Theme.of(context).colorScheme.onBackground,
                     ),
               ),
-              subtitle: Text('only include Lactose-free Meal',
-                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                        color: Theme.of(context).colorScheme.onBackground,
-                      )),
-              activeColor: Theme.of(context).colorScheme.tertiary,
+              subtitle: Text(
+                'Only include Lactose-free Meal',
+                style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
+              ),
+              activeColor: Theme.of(context).colorScheme.secondary,
               contentPadding: const EdgeInsets.only(left: 34, right: 22),
             ),
             SwitchListTile(
-              value: _VegeterianFilterset,
+              value: activefilters[Filter.Vegetarian]!,
               onChanged: (ischecked) {
-                setState(() {
-                  _VegeterianFilterset = ischecked;
-                });
+                ref
+                    .read(filterProvider.notifier)
+                    .setFilter(Filter.Vegetarian, ischecked);
               },
               title: Text(
                 'Vegetarian',
@@ -100,19 +70,21 @@ class _FilterScreenState extends ConsumerState<FilterScreen> {
                       color: Theme.of(context).colorScheme.onBackground,
                     ),
               ),
-              subtitle: Text('only include vegetarian Meal',
-                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                        color: Theme.of(context).colorScheme.onBackground,
-                      )),
-              activeColor: Theme.of(context).colorScheme.tertiary,
+              subtitle: Text(
+                'Only include Vegetarian Meal',
+                style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
+              ),
+              activeColor: Theme.of(context).colorScheme.secondary,
               contentPadding: const EdgeInsets.only(left: 34, right: 22),
             ),
             SwitchListTile(
-              value: _VeganFilterSet,
+              value: activefilters[Filter.Vegan]!,
               onChanged: (ischecked) {
-                setState(() {
-                  _VeganFilterSet = ischecked;
-                });
+                ref
+                    .read(filterProvider.notifier)
+                    .setFilter(Filter.Vegan, ischecked);
               },
               title: Text(
                 'Vegan',
@@ -120,14 +92,16 @@ class _FilterScreenState extends ConsumerState<FilterScreen> {
                       color: Theme.of(context).colorScheme.onBackground,
                     ),
               ),
-              subtitle: Text('only include Vegan Meal',
-                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                        color: Theme.of(context).colorScheme.onBackground,
-                      )),
-              activeColor: Theme.of(context).colorScheme.tertiary,
+              subtitle: Text(
+                'Only include Vegan Meal',
+                style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
+              ),
+              activeColor: Theme.of(context).colorScheme.secondary,
               contentPadding: const EdgeInsets.only(left: 34, right: 22),
             ),
-          ]),
+          ],
         ));
   }
 }

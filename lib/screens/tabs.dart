@@ -30,8 +30,6 @@ class TabsScreen extends ConsumerStatefulWidget {
 class _TabsScreen extends ConsumerState<TabsScreen> {
   int _selectedPageIndex = 0;
 
-  Map<Filter, bool> _selectedFilter = KInitialFilters;
-
   void showinfoMessage(String message) {}
 
   void _selectpage(int index) {
@@ -54,16 +52,16 @@ class _TabsScreen extends ConsumerState<TabsScreen> {
     final meals = ref.watch(Mealsprovides);
     final activefilters = ref.watch(filterProvider);
     final availableMeals = meals.where((meal) {
-      if (_selectedFilter[Filter.Glutenfree]! && !meal.isGlutenFree) {
+      if (activefilters[Filter.Glutenfree]! && !meal.isGlutenFree) {
         return false;
       }
-      if (_selectedFilter[Filter.LactoseFree]! && !meal.isLactoseFree) {
+      if (activefilters[Filter.LactoseFree]! && !meal.isLactoseFree) {
         return false;
       }
-      if (_selectedFilter[Filter.Vegetarian]! && !meal.isVegetarian) {
+      if (activefilters[Filter.Vegetarian]! && !meal.isVegetarian) {
         return false;
       }
-      if (_selectedFilter[Filter.Vegan]! && !meal.isVegan) {
+      if (activefilters[Filter.Vegan]! && !meal.isVegan) {
         return false;
       }
       return true;
