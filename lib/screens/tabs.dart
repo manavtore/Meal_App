@@ -43,19 +43,16 @@ class _TabsScreen extends ConsumerState<TabsScreen> {
   void _setScreen(String identifier) async {
     Navigator.of(context).pop();
     if (identifier == 'filters') {
-      final result = await Navigator.of(context).push<Map<Filter, bool>>(
-        MaterialPageRoute(
-            builder: (ctx) => FilterScreen(currentFilter: _selectedFilter)),
+      await Navigator.of(context).push<Map<Filter, bool>>(
+        MaterialPageRoute(builder: (ctx) => const FilterScreen()),
       );
-      setState(() {
-        _selectedFilter = result ?? KInitialFilters;
-      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final meals = ref.watch(Mealsprovides);
+    final activefilters = ref.watch(filterProvider);
     final availableMeals = meals.where((meal) {
       if (_selectedFilter[Filter.Glutenfree]! && !meal.isGlutenFree) {
         return false;
