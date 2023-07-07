@@ -37,13 +37,10 @@ class MealsScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'ky re aee bhikmangya ky dekh rha hai',
+              'The item you have selected is not available',
               style: TextStyle(
                 color: Colors.green,
               ),
-              // style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-              //       color: Theme.of(context).colorScheme.onBackground,
-              //     ),
             ),
             SizedBox(
               height: 24,
@@ -53,9 +50,6 @@ class MealsScreen extends StatelessWidget {
               style: TextStyle(
                 color: Colors.green,
               ),
-              // style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              //       color: Theme.of(context).colorScheme.onBackground,
-              //     ),
             ),
           ],
         ),
