@@ -58,39 +58,33 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 
   @override
   Widget build(BuildContext context) {
-    return
-        // Scaffold(
-        //   appBar: AppBar(
-        //     title: const Text('Pick your Category'),
-        //   ),
-        // body:
-        AnimatedBuilder(
-            animation: _animationcontroler,
-            child: GridView(
-                padding: const EdgeInsets.all(24),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 3 / 2,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 20,
-                ),
-                children: [
-                  for (final category in availableCategories)
-                    CategoryGridItem(
-                      category: category,
-                      onselectedCategory: () {
-                        _selectCategory(context, category);
-                      },
-                    )
-                ]),
-            builder: (context, child) => Padding(
-                  padding: EdgeInsets.only(
-                      top: 100 - _animationcontroler.value * 100),
-                  child: child,
+    return AnimatedBuilder(
+        animation: _animationcontroler,
+        child: GridView(
+            padding: const EdgeInsets.all(24),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 3 / 2,
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20,
+            ),
+            children: [
+              for (final category in availableCategories)
+                CategoryGridItem(
+                  category: category,
+                  onselectedCategory: () {
+                    _selectCategory(context, category);
+                  },
                 )
-
-            //   },
-            );
+            ]),
+        builder: (context, child) => SlideTransition(
+              position: (Tween<Offset>(
+                begin: const Offset(0, 0.3),
+                end: const Offset(0, 0),
+              ).animate(CurvedAnimation(
+                  parent: _animationcontroler, curve: Curves.easeInOut))),
+              child: child,
+            ));
 
     // );
   }
